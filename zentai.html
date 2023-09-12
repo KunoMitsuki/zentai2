@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>スマートフォンの外部カメラ映像の表示</title>
+    <style>
+        /* <video>要素を画面いっぱいに広げるスタイル */
+        video {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <video id="webcam" autoplay></video>
+
+    <script>
+        // スマートフォンの外部カメラ（バックカメラ）にアクセス
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+            .then(function (stream) {
+                // カメラの映像を<video>要素に表示
+                var webcamElement = document.getElementById('webcam');
+                webcamElement.srcObject = stream;
+            })
+            .catch(function (error) {
+                console.error('カメラへのアクセスに失敗しました: ', error);
+            });
+    </script>
+</body>
+</html>
